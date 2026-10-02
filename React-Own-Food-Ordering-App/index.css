@@ -44,3 +44,8 @@
   box-shadow: 1px 1px 1px 1px black;
   cursor: pointer;
 }
+
+
+.filter-btn{
+  margin: 8px
+}
