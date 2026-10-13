@@ -17,6 +17,14 @@ import {Component} from './path';
 # React Hooks
 - ui Layer + Data Layer ( work together instantly)  that's we facebook team released a HOOKs.
 - A Hook is normal js Function (utility functions) written by facebook team.
-
-
 - whenever a state variable updates react will re-render the component;
+
+
+# Two Types of Routing...
+1. client side routing.
+2. server side routing.
+
+
+
+# Life Cycle Methods:
+https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
