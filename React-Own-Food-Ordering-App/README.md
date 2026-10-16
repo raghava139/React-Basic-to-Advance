@@ -28,3 +28,8 @@ import {Component} from './path';
 
 # Life Cycle Methods:
 https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+# Optimizing our App:
+- custom Hooks
+bundled full size -> spliting
+- chunking , code spliting, dynamic bundling, on demand loading, lazy loading and dynamic import =========> these are all same;

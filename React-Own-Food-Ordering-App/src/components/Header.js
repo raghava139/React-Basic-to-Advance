@@ -1,20 +1,23 @@
 import { useEffect, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
-import {Link} from 'react-router'
+import { Link } from "react-router";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 export const Header = () => {
   // let btnName = "Login";
   const [btnName, setbtnName] = useState("Login");
 
-  // useEffect
-  // if no dependency array 
-  useEffect(()=>{
-    // console.log('useEffect called')
+  //Online Status Hook;
+  const CheckOnlineOrOffline = useOnlineStatus();
 
+  // useEffect
+  // if no dependency array
+  useEffect(() => {
+    // console.log('useEffect called')
     // return()=>{
     //   console.log('return called')
     // }
-  },[btnName])
+  }, [btnName]);
   return (
     <div className="header">
       <div className="image-container">
@@ -22,14 +25,23 @@ export const Header = () => {
       </div>
       <div className="nav-items">
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/about">About Us</Link></li>
-          <li><Link to='/contact'>Contact Us</Link></li>
+          <li>Online Status : {CheckOnlineOrOffline ? "Online" : "Offline"}</li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About Us</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact Us</Link>
+          </li>
+          <li>
+            <Link to="/grocery">Grocery Items</Link>
+          </li>
           <li>Cart</li>
           <button
             onClick={() => {
-              btnName === "Login" 
-              ? setbtnName("Logout") : setbtnName("Login");
+              btnName === "Login" ? setbtnName("Logout") : setbtnName("Login");
             }}
             className="login-btn"
           >
