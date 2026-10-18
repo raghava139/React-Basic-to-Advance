@@ -1,14 +1,18 @@
 // import resList from "../utils/mockData";
-import resList from "../utils/mockData";
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+// import resList from "../utils/mockData";
+import RestaurantCard, { HighRatedItems } from "./RestaurantCard";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { UserContext } from "../utils/userContext";
 
 const Body = () => {
   //state variable - Super powerful variable;'
   let [listOfRestaurants, setRestaurants] = useState([]);
   let [SearchListofRests, setSearchList] = useState([]);
   let [searchText, setSearchText] = useState("");
+
+  const { curr_name, setUserInfo } = useContext(UserContext);
+  const HighRatingListItems = HighRatedItems(RestaurantCard);
   // console.log(<Body/>)
   // normal js variable
   // let listOfRestaurants = [];
@@ -73,7 +77,7 @@ const Body = () => {
           </button>
         </div>
         <button
-            className="px-4 bg-blue-100 m-4"
+          className="px-4 bg-blue-100 m-4"
           onClick={() => {
             const filterRestaruants = listOfRestaurants.filter((data) => {
               return data?.info?.avgRating > 4;
@@ -85,14 +89,31 @@ const Body = () => {
           Top Rated Restaurants
         </button>
       </div>
+      user Name:{" "}
+      <input
+        type="text"
+        className="border-2"
+        onChange={(e) => setUserInfo(e.target.value)}
+        value={curr_name}
+      />
       <div className="flex flex-wrap">
         {SearchListofRests?.map((data, index) => {
-          return (
-            <RestaurantCard
-              key={data?.card?.card?.info?.id || index}
-              resData={data}
-            />
-          );
+          const avgRating = data?.info.avgRating;
+          if (avgRating <= 4) {
+            return (
+              <HighRatingListItems
+                key={data?.card?.card?.info?.id || index}
+                resData={data}
+              />
+            );
+          } else {
+            return (
+              <RestaurantCard
+                key={data?.card?.card?.info?.id || index}
+                resData={data}
+              />
+            );
+          }
         })}
       </div>
     </div>

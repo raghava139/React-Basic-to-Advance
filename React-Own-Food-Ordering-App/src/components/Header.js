@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { UserContext } from "../utils/userContext";
 
 export const Header = () => {
   // let btnName = "Login";
@@ -9,6 +10,9 @@ export const Header = () => {
 
   //Online Status Hook;
   const CheckOnlineOrOffline = useOnlineStatus();
+
+  //useContext
+  const { curr_name } = useContext(UserContext);
 
   // useEffect
   // if no dependency array
@@ -19,11 +23,11 @@ export const Header = () => {
     // }
   }, [btnName]);
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between bg-gray-600">
       <div className="image-container">
         <img className="w-44" src={LOGO_URL} />
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center text-white">
         <ul className="flex p-4">
           <li className="px-4">
             Online Status : {CheckOnlineOrOffline ? "Online" : "Offline"}
@@ -41,6 +45,7 @@ export const Header = () => {
             <Link to="/grocery">Grocery Items</Link>
           </li>
           <li className="px-4">Cart</li>
+          <li className="px-4 font-bold text-2xl">{curr_name}</li>
           <button
             onClick={() => {
               btnName === "Login" ? setbtnName("Logout") : setbtnName("Login");

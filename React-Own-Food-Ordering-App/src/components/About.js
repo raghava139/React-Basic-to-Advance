@@ -3,6 +3,7 @@ import UserClass from "./UserClass";
 import React from "react";
 import UserClassAPI from "./UserClassAPI-Call";
 import User from "./User";
+import { UserContext } from "../utils/userContext";
 
 // const About = () => {
 //   return (
@@ -38,6 +39,11 @@ class About extends React.Component {
     return (
       <div>
         <h1>About Page</h1>
+        <UserContext.Consumer>
+          {
+            ({curr_name})=><h1 className="font-bold">{curr_name}</h1>
+          }
+        </UserContext.Consumer>
         <User name = {'raghavendra'} />
         {/* <UserClass name={"rajesh babu"} /> */}
         {/* <UserClassAPI name={"rajesh babu"} /> */}
