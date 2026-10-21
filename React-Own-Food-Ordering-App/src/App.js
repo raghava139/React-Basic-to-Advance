@@ -2,13 +2,13 @@ import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
-// import About from "./components/About";
-// import Contact from "./components/Contact-Us";
-// import GroceryItems from "./components/GroceryItems";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
 import { UserContext } from "./utils/userContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import CallMemo from "./components/memo-call";
 
 //----low Level for Fooder Ordering app----
 //Header -> logo, navitems , cart
@@ -19,6 +19,8 @@ import { UserContext } from "./utils/userContext";
 const GroceryItems = lazy(() => import("./components/GroceryItems"));
 const About = lazy(() => import("./components/About"));
 const Contact = lazy(() => import("./components/Contact-Us"));
+const CartItems = lazy(() => import("./components/CartPage"));
+const FakeApi = lazy(() => import("./components/FakeApi"));
 
 const AppLayout = () => {
   const [userInfo, setUserInfo] = useState("");
@@ -30,13 +32,15 @@ const AppLayout = () => {
     setUserInfo(data?.name);
   }, []);
   return (
-    <div className="app">
-      <UserContext.Provider value={{ curr_name: userInfo, setUserInfo}}>
+    // <UserContext.Provider value={{ curr_name: userInfo, setUserInfo }}>
+    <Provider store={appStore}>
+      <div className="app">
         <Header />
         {/* to render the children routes */}
         <Outlet />
-      </UserContext.Provider>
-    </div>
+      </div>
+    </Provider>
+    // </UserContext.Provider>
   );
 };
 
@@ -71,6 +75,30 @@ const appRouter = createBrowserRouter([
         element: (
           <Suspense fallback={"loading grocery items...."}>
             <GroceryItems />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/cart",
+        element: (
+          <Suspense fallback={"loading cart items...."}>
+            <CartItems />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/fake-api-redux",
+        element: (
+          <Suspense fallback={"loading fake api data...."}>
+            <FakeApi />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/demo-usememo-callback",
+        element: (
+          <Suspense fallback={"loading fake api data...."}>
+            <CallMemo />
           </Suspense>
         ),
       },
