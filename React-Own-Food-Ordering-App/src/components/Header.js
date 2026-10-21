@@ -3,6 +3,7 @@ import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import { UserContext } from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 export const Header = () => {
   // let btnName = "Login";
@@ -14,6 +15,9 @@ export const Header = () => {
   //useContext
   const { curr_name } = useContext(UserContext);
 
+  //subscribing to the store using selector;
+  const cartData = useSelector((state) => state.cart.items);
+
   // useEffect
   // if no dependency array
   useEffect(() => {
@@ -22,6 +26,7 @@ export const Header = () => {
     //   console.log('return called')
     // }
   }, [btnName]);
+
   return (
     <div className="flex justify-between bg-gray-600">
       <div className="image-container">
@@ -44,8 +49,13 @@ export const Header = () => {
           <li className="px-4">
             <Link to="/grocery">Grocery Items</Link>
           </li>
-          <li className="px-4">Cart</li>
-          <li className="px-4 font-bold text-2xl">{curr_name}</li>
+          <li className="px-4">
+            <Link to="/cart">Cart {cartData.length}</Link>
+          </li>
+          <li className="px-4 font-bold text-2xl">
+            <Link to="/fake-api-redux">Redux API</Link>
+          </li>
+          <li className="px-4">{curr_name}</li>
           <button
             onClick={() => {
               btnName === "Login" ? setbtnName("Logout") : setbtnName("Login");

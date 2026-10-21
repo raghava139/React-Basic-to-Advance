@@ -33,3 +33,12 @@ https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
 - custom Hooks
 bundled full size -> spliting
 - chunking , code spliting, dynamic bundling, on demand loading, lazy loading and dynamic import =========> these are all same;
+
+
+# Redux Toolkit
+ - Install @reduxjs/toolkit and react-redux
+ - Build our Store
+ - connect our store to our app
+ - slice ( cart slice)
+ - Dispatch(action)
+ - selector
