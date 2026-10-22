@@ -38,7 +38,6 @@ const CartSlice = createSlice({
   //asynchronous api calls handling...
   //to handle the async api life cycle actions - extra reducers
   extraReducers: (builder) => {
-    console.log(builder)
     builder
       .addCase(FakeApiThunk.pending, (state) => {
         state.fakeUsers.loading = true;

@@ -5,10 +5,13 @@ import Body from "./components/Body";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import { Outlet, RouterProvider, createBrowserRouter } from "react-router";
-import { UserContext } from "./utils/userContext";
+// import { UserContext } from "./utils/userContext";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
-import CallMemo from "./components/memo-call";
+import MemoPerformance from "./components/Performances/Memo-Performance";
+import CallBackPerformance from "./components/Performances/CallBackPerformance";
+import ReferencePerformance from "./components/Performances/RefDom";
+
 
 //----low Level for Fooder Ordering app----
 //Header -> logo, navitems , cart
@@ -95,11 +98,13 @@ const appRouter = createBrowserRouter([
         ),
       },
       {
-        path: "/demo-usememo-callback",
+        path: "/performances-test",
         element: (
-          <Suspense fallback={"loading fake api data...."}>
-            <CallMemo />
-          </Suspense>
+          <div className="flex">
+            <MemoPerformance />
+            <CallBackPerformance />
+            <ReferencePerformance/>
+          </div>
         ),
       },
       {
